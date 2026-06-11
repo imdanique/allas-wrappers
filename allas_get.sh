@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###configure these first###
-ALLAS_CLI_UTILS="/csc/epitkane/software/allas-cli-utils/"
+ALLAS_CLI_UTILS="/csc/epitkane/software/allas-cli-utils"
 OS_USERNAME="cscusername"
 OS_PROJECT_NAME="project_0000000"
 C4GH_KEY="$HOME/path/username.sec"
@@ -21,6 +21,8 @@ read -sp "Enter c4gh key passphrase: " C4GH_PASSPHRASE
 echo
 export OS_PASSWORD C4GH_PASSPHRASE
 
+export allas_conf_path="$ALLAS_CLI_UTILS/allas_conf"
+
 source "$ALLAS_CLI_UTILS"/allas_conf -f -k -u "$OS_USERNAME" -p "$OS_PROJECT_NAME"
 
 echo "Listing files in $CONTAINER..."
@@ -34,9 +36,6 @@ echo "Found ${#files[@]} files to download."
 failed=()
 for ob in "${files[@]}"; do
     [[ -z "$ob" ]] && continue
-
-    # Refresh token before each file - non-interactive since OS_PASSWORD is exported
-    source "$ALLAS_CLI_UTILS"/allas_conf -f -k -u "$OS_USERNAME" -p "$OS_PROJECT_NAME"
 
     full_path="$CONTAINER/$ob"
     target="${ob%%.c4gh}"
