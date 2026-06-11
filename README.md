@@ -2,8 +2,6 @@
 
 Convenience wrappers around [allas-cli-utils](https://github.com/CSCfi/allas-cli-utils) for downloading and uploading data to CSC Allas object storage, developed for use at FIMM.
 
-CSC's `allas-cli-utils` provides the core functionality, but working with encrypted data in practice involves several steps — authenticating, listing bucket contents, handling token expiry, stripping redundant path prefixes, and decrypting files — that benefit from automation. These scripts wrap that workflow into a single command.
-
 ---
 
 ## Rationale
